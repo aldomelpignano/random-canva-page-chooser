@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+    async function redirectRandom() {
+      const response = await fetch('links.json');
+      const data = await response.json();
+      const links = data.links;
+
+      const today = new Date();
+
+      const seed = today.getFullYear() * 1000 + today.getMonth() * 100 + today.getDate();
+
+      function seededRandom(seed) {
+        let x = Math.sin(seed) * 10000;
+        return x - Math.floor(x);
+      }
+
+      const random = seededRandom(seed);
+      const index = Math.floor(random * links.length);
+
+      window.location.href = links[index];
+    }
+
+    redirectRandom();
+  </script>
+</head>
+<body>
+    <p>Trasferimento...</p>
+</body>
+</html>
